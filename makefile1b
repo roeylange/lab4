@@ -1,0 +1,12 @@
+all:
+	nasm -f elf32 start.s -o start.o
+	gcc -m32 -Wall -ansi -c -nostdlib -fno-stack-protector util.c -o util.o
+	gcc -m32 -Wall -ansi -c -nostdlib -fno-stack-protector task1b.c -o task1b.o
+	ld -m elf_i386 start.o task1b.o util.o -o task1b
+	rm task1b.o
+	rm start.o
+	rm util.o
+
+.PHONY: clean
+clean:
+	rm -rf ./*.o task1b
